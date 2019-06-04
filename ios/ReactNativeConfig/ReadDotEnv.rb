@@ -27,7 +27,7 @@ def read_dot_env(envs_root)
     path = File.expand_path(File.join(envs_root, file.to_s))
     if File.exists?("#{path}.ios")
       raw = File.read("#{path}.ios")
-    if File.exist?(path)
+    elsif File.exist?(path)
       raw = File.read(path)
     elsif File.exist?("#{file}.ios")
       raw = File.read("#{file}.ios")
@@ -38,6 +38,9 @@ def read_dot_env(envs_root)
       unless File.exist?(defaultEnvPath)
         # try as absolute path
         defaultEnvPath = defaultEnvFile
+      end
+      if File.exists?("#{defaultEnvPath}.ios")
+        defaultEnvPath = "#{defaultEnvPath}.ios"
       end
       defaultRaw = File.read(defaultEnvPath)
       raw = defaultRaw + "\n" + raw if defaultRaw

@@ -41,7 +41,6 @@ def loadDotEnv(flavor = getCurrentFlavor()) {
     }
 
     def env = [:]
-    println("Reading env from: $envFile")
 
     File f = new File("$project.rootDir/../${envFile}.android");
     if (!f.exists()) {
@@ -55,6 +54,7 @@ def loadDotEnv(flavor = getCurrentFlavor()) {
     if (!f.exists()) {
         f = new File("$envFile");
     }
+    println("Reading env from: $f")
 
     if (f.exists()) {
         f.eachLine { line ->

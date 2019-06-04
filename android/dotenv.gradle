@@ -43,7 +43,15 @@ def loadDotEnv(flavor = getCurrentFlavor()) {
     def env = [:]
     println("Reading env from: $envFile")
 
-    File f = new File("$project.rootDir/../$envFile");
+    File f = new File("$project.rootDir/../$envFile.android");
+    if (!f.exists()) {
+        f = new File("$project.rootDir/../$envFile");
+    }
+
+    if (!f.exists()) {
+        f = new File("$envFile.android");
+    }
+
     if (!f.exists()) {
         f = new File("$envFile");
     }

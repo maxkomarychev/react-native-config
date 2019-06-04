@@ -25,8 +25,12 @@ def read_dot_env(envs_root)
     dotenv_pattern = /^(?:export\s+|)(?<key>[[:alnum:]_]+)=((?<quote>["'])?(?<val>.*?[^\\])\k<quote>?|)$/
 
     path = File.expand_path(File.join(envs_root, file.to_s))
+    if File.exists?("#{path}.ios")
+      raw = File.read("#{path}.ios")
     if File.exist?(path)
       raw = File.read(path)
+    elsif File.exist?("#{file}.ios")
+      raw = File.read("#{file}.ios")
     elsif File.exist?(file)
       raw = File.read(file)
     else
